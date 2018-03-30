@@ -5,8 +5,161 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PS3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="700">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.ColumnSpan="3" Margin="5">
+            <Label>Content</Label>
+            <TextBox Name="content" Keyboard.KeyUp="OnContentKeyUp" />
+        </DockPanel>
+        <GroupBox Grid.Row="1" Margin="5" Header="Alignment">
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Margin="3" Header="Horizontal">
+                    <StackPanel Tag="horizontal" RadioButton.Checked="OnAlignmentChecked">
+                        <RadioButton Tag="left" Margin="3">Left</RadioButton>
+                        <RadioButton Tag="center" Margin="3">Center</RadioButton>
+                        <RadioButton Tag="right"  Margin="3">Right</RadioButton>
+                        <RadioButton Tag="stretch" Margin="3">Stretch</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="3" Header="Vertical">
+                    <StackPanel Tag="vertical" RadioButton.Checked="OnAlignmentChecked">
+                        <RadioButton Tag="top" Margin="3">Top</RadioButton>
+                        <RadioButton Tag="center" Margin="3">Center</RadioButton>
+                        <RadioButton Tag="bottom" Margin="3">Bottom</RadioButton>
+                        <RadioButton Tag="stretch" Margin="3">Stretch</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="5" Header="Content Alignment" Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Margin="3" Header="Horizontal">
+                    <StackPanel Tag="horizontal" RadioButton.Checked="OnContentAlignmentChecked">
+                        <RadioButton Tag="left" Margin="3">Left</RadioButton>
+                        <RadioButton Tag="center" Margin="3">Center</RadioButton>
+                        <RadioButton Tag="right" Margin="3">Right</RadioButton>
+                        <RadioButton Tag="stretch" Margin="3">Stretch</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="3" Header="Vertical">
+                    <StackPanel Tag="vertical" RadioButton.Checked="OnContentAlignmentChecked">
+                        <RadioButton Tag="top" Margin="3">Top</RadioButton>
+                        <RadioButton Tag="center" Margin="3">Center</RadioButton>
+                        <RadioButton Tag="bottom" Margin="3">Bottom</RadioButton>
+                        <RadioButton Tag="stretch" Margin="3">Stretch</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Margin="5" Padding="5" Header="Other">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label>Margin</Label>
+                <Slider Name="c_margin" Grid.Column="1" Minimum="0" Maximum="100" TickPlacement="TopLeft" TickFrequency="10" Margin="5" ValueChanged="OnMarginValueChanged"/>
+                <Label Grid.Row="1">Padding</Label>
+                <Slider Name="c_padding" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" TickPlacement="TopLeft" TickFrequency="10" Margin="5" ValueChanged="OnPaddingValueChanged" />
+                <Label Grid.Row="2">Background</Label>
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label>R</Label>
+                    <Slider Name="c_bg_red" Grid.Column="1" Margin="2" Minimum="0" Maximum="255" ValueChanged="OnSliderBackgroundChange" />
+                    <Label Grid.Column="2">G</Label>
+                    <Slider Name="c_bg_green" Grid.Column="3" Margin="2" Minimum="0" Maximum="255" ValueChanged="OnSliderBackgroundChange" />
+                    <Label Grid.Column="4">B</Label>
+                    <Slider Name="c_bg_blue" Grid.Column="5" Margin="2" Minimum="0" Maximum="255" ValueChanged="OnSliderBackgroundChange" />
+                </Grid>
+                <Label Grid.Row="3">Foreground</Label>
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label>R</Label>
+                    <TextBox Name="c_fg_red" Grid.Column="1" Margin="2" KeyUp="OnForegroundColorKeyUp"></TextBox>
+                    <Label Grid.Column="2">G</Label>
+                    <TextBox Name="c_fg_green" Grid.Column="3" Margin="2" KeyUp="OnForegroundColorKeyUp"></TextBox>
+                    <Label Grid.Column="4">B</Label>
+                    <TextBox Name="c_fg_blue" Grid.Column="5" Margin="2" KeyUp="OnForegroundColorKeyUp"></TextBox>
+                </Grid>
+                <GroupBox Header="Border" Grid.Row="4" Grid.ColumnSpan="2" Margin="5" Padding="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label >Brush</Label>
+                        <ComboBox Grid.Column="1" Margin="2" IsEditable="True" SelectionChanged="ComboBox_SelectionChanged">
+                            <ComboBoxItem>Red</ComboBoxItem>
+                            <ComboBoxItem>Green</ComboBoxItem>
+                            <ComboBoxItem>Blue</ComboBoxItem>
+                            <ComboBoxItem>Cyan</ComboBoxItem>
+                            <ComboBoxItem>Yellow</ComboBoxItem>
+                            <ComboBoxItem>Magenta</ComboBoxItem>
+                        </ComboBox>
+                        <Label Grid.Row="1">Thickness</Label>
+                        <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="20" Margin="2"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Font" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label>Family</Label>
+                <TextBox Grid.Column="1" Margin="2"/>
+                <Label Grid.Column="2">Size</Label>
+                <TextBox Grid.Column="3" Margin="2"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+                    <CheckBox Margin="5" FontWeight="Bold" Unchecked="OnBoldUnchecked" Checked="OnBoldChecked">Bold</CheckBox>
+                    <CheckBox Margin="5" FontStyle="Italic" Unchecked="OnItalicUnchecked" Checked="OnItalicChecked">Italic</CheckBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Label Name="my_label" Grid.Row="3" Grid.ColumnSpan="3" Content="Ala ma kota" Margin="5" BorderBrush="Black" BorderThickness="1" />
     </Grid>
 </Window>
